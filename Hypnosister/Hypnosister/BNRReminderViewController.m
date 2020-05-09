@@ -35,6 +35,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound)
+                          completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        // Enable or disable features based on authorization.
+    }];
+    [[UIApplication sharedApplication] registerForRemoteNotifications]; // you can also set here for local notification.
+    center.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -46,14 +53,6 @@
 }
 
 - (IBAction)addReminder:(UIButton *)sender {
-    
-    UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
-    [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound)
-                          completionHandler:^(BOOL granted, NSError * _Nullable error) {
-        // Enable or disable features based on authorization.
-    }];
-    [[UIApplication sharedApplication] registerForRemoteNotifications]; // you can also set here for local notification.
-    
     // NSLocalNotification
     NSDate *remindDate = self.datePicker.date;
     //    UILocalNotification *remindNotification = [[UILocalNotification alloc] init];
@@ -87,6 +86,7 @@
     UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"hypnosis" content:content trigger:trigger];
     
     // 4. add request
+    UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
     [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
         // adding
     }];
@@ -95,8 +95,9 @@
 # pragma mark UNUserNotificationCenterDelegate
 // override the willPresent: method to display notification in foreground mode
 // @see https://www.techotopia.com/index.php/An_iOS_10_Local_Notification_Tutorial
-
-
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler __API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0)) {
+    completionHandler(UNNotificationPresentationOptionAlert);
+}
 
 /*
  #pragma mark - Navigation
