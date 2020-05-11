@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		971C88872469B31700E04982 /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		971C88872469B31700E04982 /* HomepwnerChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomepwnerChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		971C888A2469B31700E04982 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		971C888B2469B31700E04982 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		971C88942469B31700E04982 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,7 +56,7 @@
 		971C88882469B31700E04982 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				971C88872469B31700E04982 /* Homepwner.app */,
+				971C88872469B31700E04982 /* HomepwnerChallenge.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,9 +108,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		971C88862469B31700E04982 /* Homepwner */ = {
+		971C88862469B31700E04982 /* HomepwnerChallenge */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 971C88A02469B31900E04982 /* Build configuration list for PBXNativeTarget "Homepwner" */;
+			buildConfigurationList = 971C88A02469B31900E04982 /* Build configuration list for PBXNativeTarget "HomepwnerChallenge" */;
 			buildPhases = (
 				971C88832469B31700E04982 /* Sources */,
 				971C88842469B31700E04982 /* Frameworks */,
@@ -120,9 +120,9 @@
 			);
 			dependencies = (
 			);
-			name = Homepwner;
+			name = HomepwnerChallenge;
 			productName = Homepwner;
-			productReference = 971C88872469B31700E04982 /* Homepwner.app */;
+			productReference = 971C88872469B31700E04982 /* HomepwnerChallenge.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -139,7 +139,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 971C88822469B31600E04982 /* Build configuration list for PBXProject "Homepwner" */;
+			buildConfigurationList = 971C88822469B31600E04982 /* Build configuration list for PBXProject "HomepwnerChallenge" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -152,7 +152,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				971C88862469B31700E04982 /* Homepwner */,
+				971C88862469B31700E04982 /* HomepwnerChallenge */,
 			);
 		};
 /* End PBXProject section */
@@ -350,7 +350,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		971C88822469B31600E04982 /* Build configuration list for PBXProject "Homepwner" */ = {
+		971C88822469B31600E04982 /* Build configuration list for PBXProject "HomepwnerChallenge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				971C889E2469B31900E04982 /* Debug */,
@@ -359,7 +359,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		971C88A02469B31900E04982 /* Build configuration list for PBXNativeTarget "Homepwner" */ = {
+		971C88A02469B31900E04982 /* Build configuration list for PBXNativeTarget "HomepwnerChallenge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				971C88A12469B31900E04982 /* Debug */,
