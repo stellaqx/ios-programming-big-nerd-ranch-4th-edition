@@ -19,9 +19,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     BNRItemsViewController *itemsVC = [[BNRItemsViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:itemsVC];
     
     // place the itemsVC's view into window view hierachy by making it the rootVC
-    self.window.rootViewController = itemsVC;
+    self.window.rootViewController = navController;
     
     // boilder plate
     self.window.backgroundColor = [UIColor whiteColor];

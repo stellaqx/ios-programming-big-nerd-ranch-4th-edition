@@ -11,10 +11,9 @@
 #import "BNRItemStore.h"
 #import "BNRItem.h"
 
+#import "BNRDetailViewController.h"
+
 @interface BNRItemsViewController () <UITableViewDelegate, UITableViewDataSource>
-
-@property (weak, nonatomic) IBOutlet UIView *headerView;
-
 @end
 
 @implementation BNRItemsViewController
@@ -26,6 +25,22 @@
 //        for (int i = 0; i < 5; i++) {
 //            [[BNRItemStore sharedStore] createItem];
 //        }
+        // setting nav bar title
+        UINavigationItem *navItem = self.navigationItem;
+        navItem.title = @"Homepwner";
+        
+        
+        // nav bar item
+        // Create a new bar button item that will send
+        // addNewItem: to BNRItemsViewController
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
+                        initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                             target:self
+                                             action:@selector(addNewItem:)];
+        // Set this bar button item as the right item in the navigationItem
+        navItem.rightBarButtonItem = bbi;
+        
+        navItem.leftBarButtonItem = self.editButtonItem;
     }
     return self;
 }
@@ -39,10 +54,11 @@
     
     //register, so give control to Apple,and tell them hey the table view, we use this kind of cell, and it should instantitate if no cell in reuse pool
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
-    
-    // setting the headerview in table view
-    UIView *headerView = self.headerView;
-    [self.tableView setTableHeaderView:headerView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 #pragma mark UITabvleViewDelegate
@@ -84,27 +100,6 @@ if (editingStyle == UITableViewCellEditingStyleDelete) {
     [[BNRItemStore sharedStore] moveItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
 }
 
-#pragma mark headerview
-// load bundle manually
-- (UIView *)headerView {
-    if (!_headerView) {
-        [[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil];
-    }
-    return _headerView;
-}
-
-#pragma mark edit table view target-action
-
-- (IBAction)toggleEditingMode:(UIButton *)sender {
-    if (self.isEditing) {
-        [sender setTitle:@"Edit" forState:UIControlStateNormal];
-        [self setEditing:NO animated:YES];
-    } else {
-        [sender setTitle:@"Done" forState:UIControlStateNormal];
-        [self setEditing:YES animated:YES];
-    }
-}
-
 - (IBAction)addNewItem:(UIButton *)sender {
     // Create a new BNRItem and add it to the store
     BNRItem *newItem = [[BNRItemStore sharedStore] createItem];
@@ -115,7 +110,24 @@ if (editingStyle == UITableViewCellEditingStyleDelete) {
     // Insert this new row into the table.
     [self.tableView insertRowsAtIndexPaths:@[indexPath]
                               withRowAnimation:UITableViewRowAnimationTop];
+}
+
+#pragma mark navigation
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BNRDetailViewController *detailViewController =
+                              [[BNRDetailViewController alloc] init];
     
+    // passing data between vcs
+    NSArray *items = [[BNRItemStore sharedStore] allItems];
+    BNRItem *selectedItem = items[indexPath.row];
+    // Give detail view controller a pointer to the item object in row
+    detailViewController.item = selectedItem;
+
+    // Push it onto the top of the navigation controller's stack
+    [self.navigationController pushViewController:detailViewController
+                                         animated:YES];
 }
 
 @end
