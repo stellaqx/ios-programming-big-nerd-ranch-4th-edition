@@ -35,6 +35,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    UIInterfaceOrientation uiInterfaceOrientation = self.interfaceOrientation;
+    [self prepareViewsForOrientation:uiInterfaceOrientation];
+    
     BNRItem *item = self.item;
     self.nameField.text = item.itemName;
     self.serialField.text = item.serialNumber;
@@ -125,7 +129,23 @@
 
 #pragma mark Device Orientation
 - (void)prepareViewsForOrientation:(UIInterfaceOrientation)orientation {
+    // decide if this is an ipad; if so, we do not need to do anything for device orientation change preparation.
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        return;
+    }
     
+    // if in iPhone landscape, disable the camera button
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+        self.imageView.hidden = YES;
+        self.cameraButton.enabled = NO;
+    } else {
+        self.imageView.hidden = NO;
+        self.cameraButton.enabled = YES;
+    }
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [self prepareViewsForOrientation:toInterfaceOrientation];
 }
 
 /*
