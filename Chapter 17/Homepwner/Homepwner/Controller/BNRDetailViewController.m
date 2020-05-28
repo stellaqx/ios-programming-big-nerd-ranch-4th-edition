@@ -11,7 +11,10 @@
 #import "BNRItem.h"
 #import "BNRImageStore.h"
 
-@interface BNRDetailViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
+@interface BNRDetailViewController () <UINavigationControllerDelegate,
+                                       UIImagePickerControllerDelegate,
+                                       UITextFieldDelegate,
+                                       UIPopoverControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *BNRItemView;
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
@@ -21,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
+
+@property (strong, nonatomic) UIPopoverController *imagePickerPopOver;
 
 @end
 
@@ -87,6 +92,15 @@
 #pragma mark target-action
 
 - (IBAction)takePicture:(id)sender {
+    // fix a bug when the popover controller is visible and user taps the camera button again...
+    // because when a new popover is visible, and we are creating a new popover (using a new imagePicker) by tapping camera button, and it makes the visible one destroyed (we only have one reference to it)
+    if ([self.imagePickerPopOver isPopoverVisible]) {
+        // safely get rid of it by calling dismiss
+        [self.imagePickerPopOver dismissPopoverAnimated:YES];
+        self.imagePickerPopOver = nil;
+        return;
+    }
+    
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     // If the device has a camera, take a picture, otherwise,
     // just pick from photo library
@@ -98,7 +112,18 @@
     imagePicker.delegate = self;
     
     // Place image picker on the screen
-    [self presentViewController:imagePicker animated:YES completion:nil];
+    // check for iPad before instantiating, if is Ipad, we will popover controller to present the image picker on screen
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        // create a new pop over controller that will display the image picker
+        self.imagePickerPopOver = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
+        
+        self.imagePickerPopOver.delegate = self;
+        
+        // display the popover controller, sender is the image button
+        [self.imagePickerPopOver presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    } else {
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
 }
 
 #pragma mark UIImagePickerControllerDelegate
@@ -113,8 +138,15 @@
     // Store the image in the BNRImageStore for this key
     [[BNRImageStore sharedStore] setImage:image forKey:self.item.itemKey];
     
-    // Take image picker off the screen, call dismiss   
-    [self dismissViewControllerAnimated:YES completion:nil];
+    // Try to dismiss the controller
+    // Do I have a popover controller?
+    if (self.imagePickerPopOver) {
+        [self.imagePickerPopOver dismissPopoverAnimated:YES];
+        self.imagePickerPopOver = nil;
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
 }
 
 #pragma mark UITextFieldDelegate
@@ -146,6 +178,12 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [self prepareViewsForOrientation:toInterfaceOrientation];
+}
+
+#pragma mark UIPopoverControllerDelegate
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+    NSLog(@"User dismissed popover");
+    self.imagePickerPopOver = nil;
 }
 
 /*
