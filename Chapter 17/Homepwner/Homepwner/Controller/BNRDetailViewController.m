@@ -35,11 +35,13 @@
 - (instancetype) initForNewItem:(BOOL)isNew {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
-        self.navigationItem.leftBarButtonItem = cancelBtn;
-        
-        UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save:)];
-        self.navigationItem.rightBarButtonItem = doneBtn;
+        if (isNew) {
+            UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+            self.navigationItem.leftBarButtonItem = cancelBtn;
+            
+            UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save:)];
+            self.navigationItem.rightBarButtonItem = doneBtn;
+        }
     }
     return self;
 }
