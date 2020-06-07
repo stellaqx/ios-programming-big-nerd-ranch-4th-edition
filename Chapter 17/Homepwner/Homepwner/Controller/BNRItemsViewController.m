@@ -106,13 +106,23 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 - (IBAction)addNewItem:(UIButton *)sender {
     // Create a new BNRItem and add it to the store
     BNRItem *newItem = [[BNRItemStore sharedStore] createItem];
-    // Figure out where that item is in the array
-    NSInteger lastRow = [[[BNRItemStore sharedStore] allItems] indexOfObject:newItem];
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
-    // Insert this new row into the table.
-    [self.tableView insertRowsAtIndexPaths:@[indexPath]
-                          withRowAnimation:UITableViewRowAnimationTop];
+    // Create a detail view controller to update the item
+    BNRDetailViewController *detailViewController =
+    [[BNRDetailViewController alloc] initForNewItem:YES];
+    detailViewController.item = newItem;
+    // a completion block is like a call back
+    typeof(self) __weak weakSelf = self;
+    detailViewController.dismissBlock = ^{
+        [weakSelf.tableView reloadData];
+    };
+    
+    // Create a navigation controller, and init with with the detail view controller
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+    // Update the style
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    // Present the detail view controller
+    [self presentViewController:navController animated:YES completion: NULL];
 }
 
 #pragma mark navigation
@@ -120,7 +130,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BNRDetailViewController *detailViewController =
-    [[BNRDetailViewController alloc] init];
+    [[BNRDetailViewController alloc] initForNewItem:NO];
     
     // passing data between vcs
     NSArray *items = [[BNRItemStore sharedStore] allItems];

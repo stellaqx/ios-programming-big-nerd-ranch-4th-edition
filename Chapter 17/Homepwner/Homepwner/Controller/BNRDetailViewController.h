@@ -14,7 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 @class BNRItem;
 
 @interface BNRDetailViewController : UIViewController
+
+- (instancetype) initForNewItem:(BOOL)isNew;
+- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
+
 @property (nonatomic, strong) BNRItem *item;
+@property (nonatomic, strong) void (^dismissBlock)(void);
 @end
 
 NS_ASSUME_NONNULL_END
