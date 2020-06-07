@@ -20,9 +20,11 @@
 
 + (instancetype)sharedStore {
     static BNRImageStore *sharedInstance;
-    if (!sharedInstance) {
-        sharedInstance = [[BNRImageStore alloc] initPrivate];
-    }
+    // singleton, thread safe
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] initPrivate];
+    });
     return sharedInstance;
 }
 
