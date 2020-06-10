@@ -27,6 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
 // moving rows
 - (void)moveItemAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
+// save item changes
+- (BOOL) saveChanges; 
+
 @end
 
 NS_ASSUME_NONNULL_END

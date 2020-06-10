@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BNRItemsViewController.h"
+#import "BNRItemStore.h"
 
 @interface AppDelegate () {
     UIWindow *_window;
@@ -29,6 +30,15 @@
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    BOOL success = [[BNRItemStore sharedStore] saveChanges];
+    if (success) {
+        NSLog(@"Success saving items");
+    } else {
+        NSLog(@"Fail to save items");
+    }
 }
 
 # pragma mark private

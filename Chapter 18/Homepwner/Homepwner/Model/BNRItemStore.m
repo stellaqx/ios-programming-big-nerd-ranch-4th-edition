@@ -58,6 +58,13 @@
     [self.privateItems insertObject:item atIndex:toIndex];
 }
 
+- (BOOL) saveChanges {
+    NSString *path = [self itemArchivePath];
+    
+    // return YES on success
+    return [NSKeyedArchiver archiveRootObject:self.privateItems toFile:path];
+}
+
 #pragma mark private
 
 - (instancetype)init {
@@ -68,13 +75,31 @@
 - (instancetype)initPrivate {
     self = [super init];
     if (self) {
-        _privateItems = [[NSMutableArray alloc] init];
+        NSString *path = [self itemArchivePath];
+        _privateItems = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        
+        // if the path contains empty content, create the private item here separately
+        if (!_privateItems) {
+            _privateItems = [[NSMutableArray alloc] init]; 
+        }
     }
     return self;
 }
 
 - (NSArray<BNRItem *> *)allItems {
     return [self.privateItems copy];
+}
+
+#pragma mark data persisting
+
+- (NSString *)itemArchivePath {
+    // Make sure the first argument is NSDocumentDirectory
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    // Get document directory
+    NSString *documentDir = [documentDirectories firstObject];
+    
+    return [documentDir stringByAppendingPathComponent:@"item.archive"];
 }
 
 @end
