@@ -31,7 +31,9 @@
 }
 
 - (BNRItem *)createItem {
-    BNRItem *item = [BNRItem randomItem];
+    // BNRItem *item = [BNRItem randomItem];
+    
+    BNRItem *item = [[BNRItem alloc] init];
     
     [self.privateItems addObject:item];
     
@@ -80,7 +82,7 @@
         
         // if the path contains empty content, create the private item here separately
         if (!_privateItems) {
-            _privateItems = [[NSMutableArray alloc] init]; 
+            _privateItems = [[NSMutableArray alloc] init];
         }
     }
     return self;
