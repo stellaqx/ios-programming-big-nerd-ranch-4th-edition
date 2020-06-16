@@ -28,6 +28,18 @@
     return sharedInstance;
 }
 
+- (instancetype) initPrivate {
+    self = [super init];
+    if (self) {
+        _dictionary = [[NSMutableDictionary alloc] init];
+        // register for notification, for example the low memory warnings
+        
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self selector:@selector(clearCache:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+    }
+    return self;
+}
+
 - (void)setImage:(UIImage *)image forKey:(NSString *)key {
     self.dictionary[key] = image;
     
@@ -84,19 +96,19 @@
     [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
 }
 
+#pragma mark NSNotificationCenter
+
+-(void) clearCache:(NSNotification *)notification {
+    NSLog(@"Flushing %d images from the local cache", [self.dictionary count]);
+    
+    [self.dictionary removeAllObjects];
+}
+
 #pragma mark private
 - (instancetype) init {
     //[NSException raise:@"Singletone" format:@"Please use +[BNRImageStore sharedInstance] instead."];
     @throw [NSException exceptionWithName:@"Singleton" reason:@"use +[BNRImageStore sharedInstance]" userInfo:nil];
     return nil;
-}
-
-- (instancetype) initPrivate {
-    self = [super init];
-    if (self) {
-        _dictionary = [[NSMutableDictionary alloc] init];
-    }
-    return self;
 }
 
 @end
