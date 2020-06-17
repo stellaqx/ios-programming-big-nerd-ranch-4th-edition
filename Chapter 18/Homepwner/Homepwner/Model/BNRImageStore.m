@@ -99,7 +99,7 @@
 #pragma mark NSNotificationCenter
 
 -(void) clearCache:(NSNotification *)notification {
-    NSLog(@"Flushing %d images from the local cache", [self.dictionary count]);
+    NSLog(@"Flushing %lu images from the local cache", [self.dictionary count]);
     
     [self.dictionary removeAllObjects];
 }
