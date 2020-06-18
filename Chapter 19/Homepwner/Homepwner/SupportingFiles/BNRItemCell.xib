@@ -36,6 +36,16 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dto-sv-5JS">
+                    <rect key="frame" x="0.0" y="5" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="R5g-09-C5B"/>
+                        <constraint firstAttribute="height" constant="40" id="j5G-Lc-JxH"/>
+                    </constraints>
+                    <connections>
+                        <action selector="showImage:" destination="iN0-l3-epB" eventType="touchUpInside" id="P5h-Wt-Ca9"/>
+                    </connections>
+                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCX-KD-JeR">
                     <rect key="frame" x="258" y="14.5" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -45,7 +55,9 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
+                <constraint firstItem="Dto-sv-5JS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="1Dg-WT-P9E"/>
                 <constraint firstItem="aYz-yn-btQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Ha0-Go-A8s"/>
+                <constraint firstItem="Dto-sv-5JS" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="IU3-Mh-FX5"/>
                 <constraint firstItem="aYz-yn-btQ" firstAttribute="leading" secondItem="RTC-QG-tFv" secondAttribute="trailing" constant="8" id="RIh-rS-KSs"/>
                 <constraint firstItem="ORz-uu-rg4" firstAttribute="leading" secondItem="RTC-QG-tFv" secondAttribute="trailing" constant="8" id="Vlo-Ip-keg"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="WCX-KD-JeR" secondAttribute="trailing" constant="20" id="heI-Ic-DCu"/>

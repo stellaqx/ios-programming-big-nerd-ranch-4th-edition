@@ -21,4 +21,12 @@
     // Configure the view for the selected state
 }
 
+#pragma mark target action
+
+- (IBAction)showImage:(id)sender {
+    if (self.didTapThumbnailActionBlock) {
+        self.didTapThumbnailActionBlock();
+    }
+}
+
 @end

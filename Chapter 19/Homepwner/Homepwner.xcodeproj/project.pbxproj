@@ -21,6 +21,7 @@
 		971C88BB2469D9B400E04982 /* BNRImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 971C88BA2469D9B400E04982 /* BNRImageStore.m */; };
 		973B8C1C2499B38B008A3510 /* BNRItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 973B8C1B2499B38B008A3510 /* BNRItemCell.xib */; };
 		973B8C23249B341B008A3510 /* BNRItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 973B8C22249B341B008A3510 /* BNRItemCell.m */; };
+		973B8C26249B44FE008A3510 /* BNRImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 973B8C25249B44FE008A3510 /* BNRImageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		973B8C1B2499B38B008A3510 /* BNRItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BNRItemCell.xib; sourceTree = "<group>"; };
 		973B8C21249B341B008A3510 /* BNRItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BNRItemCell.h; sourceTree = "<group>"; };
 		973B8C22249B341B008A3510 /* BNRItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNRItemCell.m; sourceTree = "<group>"; };
+		973B8C24249B44FE008A3510 /* BNRImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BNRImageViewController.h; path = Homepwner/Controller/BNRImageViewController.h; sourceTree = SOURCE_ROOT; };
+		973B8C25249B44FE008A3510 /* BNRImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BNRImageViewController.m; path = Homepwner/Controller/BNRImageViewController.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 				971C88932469B31700E04982 /* Main.storyboard */,
 				971C88B42469D03C00E04982 /* BNRItem.xib */,
 				973B8C1B2499B38B008A3510 /* BNRItemCell.xib */,
+				973B8C24249B44FE008A3510 /* BNRImageViewController.h */,
+				973B8C25249B44FE008A3510 /* BNRImageViewController.m */,
 				973B8C20249B32FB008A3510 /* View */,
 			);
 			path = SupportingFiles;
@@ -212,6 +217,7 @@
 			files = (
 				971C88B32469D01C00E04982 /* BNRDetailViewController.m in Sources */,
 				973B8C23249B341B008A3510 /* BNRItemCell.m in Sources */,
+				973B8C26249B44FE008A3510 /* BNRImageViewController.m in Sources */,
 				971C888C2469B31700E04982 /* AppDelegate.m in Sources */,
 				971C88BB2469D9B400E04982 /* BNRImageStore.m in Sources */,
 				971C88A82469B74300E04982 /* BNRItem.m in Sources */,

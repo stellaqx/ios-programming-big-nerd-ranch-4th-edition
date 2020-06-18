@@ -10,14 +10,18 @@
 
 #import "BNRItem.h"
 #import "BNRItemStore.h"
+#import "BNRImageStore.h"
 
 #import "BNRDetailViewController.h"
+#import "BNRImageViewController.h"
 
 #import "BNRItemCell.h"
 
 @interface BNRItemsViewController () <UITableViewDelegate,
-                                      UITableViewDataSource>
-                                      
+                                      UITableViewDataSource,
+                                      UIPopoverControllerDelegate>
+
+@property (strong, nonatomic) UIPopoverController *imagePopover;
 
 @end
 
@@ -92,7 +96,44 @@
     
     cell.thumbnailView.image = item.thumbnail;
     
+    // creates a block when user taps on the thumbnail, expand to full
+    __weak __typeof__(self) weakSelf = self;
+    cell.didTapThumbnailActionBlock =^{
+        NSLog(@"Going to show image for %@", item);
+        
+        if ([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad) {
+            return;
+        }
+        
+        // if there is no image, no need to call to imagePopover to display
+        if (!item.thumbnail) {
+            return;
+        }
+        
+        UIImage *image = [[BNRImageStore sharedStore] imageForKey:item.itemKey];
+        
+        // make a rectangele for the frame of the thumbnail relavite to the table view?
+        CGRect rect = [weakSelf.view convertRect:cell.thumbnailView.bounds toView:cell.thumbnailView];
+        
+        // create a new BNRImageVC, set property image
+        BNRImageViewController *imageVC = [[BNRImageViewController alloc] init];
+        imageVC.image = image;
+        
+        // present a 600 * 600 pop over
+        weakSelf.imagePopover = [[UIPopoverController alloc] initWithContentViewController:imageVC];
+        weakSelf.imagePopover.delegate = self;
+        weakSelf.imagePopover.popoverContentSize = CGSizeMake(600, 600);
+        [weakSelf.imagePopover presentPopoverFromRect:rect inView:weakSelf.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    };
+    
     return cell;
+}
+
+#pragma mark UIPopoverControllerDelegate
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+    // if user tap anywhere outside of the pop over area, dismiss
+    self.imagePopover = nil;
 }
 
 // deleting items - If the table view is asking to commit a delete command...
