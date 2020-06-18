@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BNRItemCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lNW-Mt-KkT">
+                    <rect key="frame" x="-80" y="51" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RTC-QG-tFv">
+                    <rect key="frame" x="0.0" y="5" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="am4-2Z-myr"/>
+                        <constraint firstAttribute="width" constant="40" id="jTQ-Ui-cTx"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYz-yn-btQ">
+                    <rect key="frame" x="48" y="0.0" width="42" height="21"/>
+                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORz-uu-rg4">
+                    <rect key="frame" x="48" y="34" width="33" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dto-sv-5JS">
+                    <rect key="frame" x="0.0" y="5" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="R5g-09-C5B"/>
+                        <constraint firstAttribute="height" constant="40" id="j5G-Lc-JxH"/>
+                    </constraints>
+                    <connections>
+                        <action selector="showImage:" destination="iN0-l3-epB" eventType="touchUpInside" id="P5h-Wt-Ca9"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCX-KD-JeR">
+                    <rect key="frame" x="258" y="14.5" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="Dto-sv-5JS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="1Dg-WT-P9E"/>
+                <constraint firstItem="aYz-yn-btQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Ha0-Go-A8s"/>
+                <constraint firstItem="Dto-sv-5JS" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="IU3-Mh-FX5"/>
+                <constraint firstItem="aYz-yn-btQ" firstAttribute="leading" secondItem="RTC-QG-tFv" secondAttribute="trailing" constant="8" id="RIh-rS-KSs"/>
+                <constraint firstItem="ORz-uu-rg4" firstAttribute="leading" secondItem="RTC-QG-tFv" secondAttribute="trailing" constant="8" id="Vlo-Ip-keg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="WCX-KD-JeR" secondAttribute="trailing" constant="20" id="heI-Ic-DCu"/>
+                <constraint firstItem="RTC-QG-tFv" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="kZV-Kd-X6c"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ORz-uu-rg4" secondAttribute="bottom" id="n3V-Ib-lAb"/>
+                <constraint firstItem="WCX-KD-JeR" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="tsy-Un-vjO"/>
+                <constraint firstItem="RTC-QG-tFv" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="wOS-HE-9G6"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="nameLabel" destination="aYz-yn-btQ" id="14Z-qN-YX3"/>
+                <outlet property="serialNumberLabel" destination="ORz-uu-rg4" id="7ks-Zp-XpU"/>
+                <outlet property="thumbnailView" destination="RTC-QG-tFv" id="I5V-VU-14a"/>
+                <outlet property="valueLabel" destination="WCX-KD-JeR" id="IX4-Iv-53d"/>
+            </connections>
+            <point key="canvasLocation" x="-315" y="-120.4225352112676"/>
+        </view>
+    </objects>
+</document>
